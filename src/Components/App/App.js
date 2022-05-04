@@ -3,6 +3,9 @@ import {createGlobalStyle} from "styled-components";
 
 import SignIn from "./SignIn/SignIn";
 import SignUp from "./SignUp/SignUp";
+import Home from "./Home/Home";
+import Withdraw from "./Withdraw/Withdraw";
+import Deposit from "./Deposit/Deposit";
 
 export default function App(){
     return (
@@ -10,9 +13,9 @@ export default function App(){
             <Routes>
                 <Route path="/" element={<SignIn />} />
                 <Route path="/sign-up" element={<SignUp />} />
-                home
-                input
-                output
+                <Route path="home" element={<Home />} />
+                <Route path="withdraw" element={<Withdraw />} />
+                <Route path="deposit" element={<Deposit />} />
     
             </Routes>
             <GlobalStyle/>

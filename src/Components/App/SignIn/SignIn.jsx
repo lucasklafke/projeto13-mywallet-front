@@ -1,16 +1,23 @@
 import { useState } from "react"
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate} from 'react-router-dom';
 export default function SignIn(){
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     console.log("email: ", email);
     console.log("password: ", password);
+
+    const navigate = useNavigate();
+
+    function handleSubmit(e){
+        e.preventDefault();
+        navigate("/home")
+    }
     return (
         <PageContainer>
             <h1>MyWallet</h1>
             <FormContainer>
-                <form>
+                <form onSubmit={e => handleSubmit(e)}>
                     <input type="text" placeholder="E-mail" value={email} onChange={e => { setEmail(e.target.value) }}/>
                     <input type="text" placeholder="Password" value={password} onChange={e => { setPassword(e.target.value) }}/>
                     <button>Entrar</button>
