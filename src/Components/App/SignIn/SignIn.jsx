@@ -12,12 +12,12 @@ export default function SignIn(){
             <FormContainer>
                 <form>
                     <input type="text" placeholder="E-mail" value={email} onChange={e => { setEmail(e.target.value) }}/>
-                    <input type="text" placeholder="password" value={password} onChange={e => { setPassword(e.target.value) }}/>
+                    <input type="text" placeholder="Password" value={password} onChange={e => { setPassword(e.target.value) }}/>
                     <button>Entrar</button>
                 </form>
             </FormContainer>
-            <Link to="/SignUp">
-                <span className="register">Primeira vez? Cadastre-se!</span>
+            <Link to="/sign-up">
+                <span className="register">First time? Sign up!</span>
             </Link>
         </PageContainer>
     )
