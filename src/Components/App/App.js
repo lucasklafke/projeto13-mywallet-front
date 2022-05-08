@@ -14,9 +14,9 @@ export default function App(){
                 <Routes>
                     <Route path="/" element={<SignIn />} />
                     <Route path="/sign-up" element={<SignUp />} />
-                    <Route path="home" element={<Home />} />
-                    <Route path="withdraw" element={<Withdraw />} />
-                    <Route path="deposit" element={<Deposit />} />
+                    <Route path="/home" element={<Home />} />
+                    <Route path="/withdraw" element={<Withdraw />} />
+                    <Route path="/deposit" element={<Deposit />} />
         
                 </Routes>
                 <GlobalStyle/>

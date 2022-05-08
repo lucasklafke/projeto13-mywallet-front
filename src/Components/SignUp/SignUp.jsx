@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import axios from "axios"
 
-import { useToken } from "../Contexts/userContext";
+
 
 export default function SignUp() {
     const [name, setName] = useState('');
@@ -12,8 +12,7 @@ export default function SignUp() {
     const [repeat_password, setRepeat_password] = useState('');
     console.log("email: ", email);
     console.log("password: ", password);
-    const {token} = useToken()
-    console.log(token)
+    
     function handleSubmit(e){
         e.preventDefault()
         const data = {
