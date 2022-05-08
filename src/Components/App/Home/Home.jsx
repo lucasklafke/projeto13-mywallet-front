@@ -1,14 +1,22 @@
 import {useState} from "react"
 import styled from "styled-components"
+import { useNavigate } from "react-router-dom";
 
 import { IoLogOutOutline, IoAddCircleOutline, IoRemoveCircleOutline } from "react-icons/io5";
 
 export default function Home(){
+    const navigate = useNavigate()
+    function logOut(){
+        const answer = window.confirm("do you want to log out?")
+        if(answer){
+            navigate("/")
+        }
+    }
     return (
         <PageContainer>
             <header>
                 <h1>Olá {}</h1>
-                <IoLogOutOutline color="fff" fontSize="30" fontWeight="700"/>
+                <IoLogOutOutline color="fff" fontSize="30" fontWeight="700" onClick={() => logOut()}/>
             </header>
             <main>
 

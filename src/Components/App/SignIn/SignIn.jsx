@@ -1,6 +1,7 @@
 import { useState } from "react"
 import styled from 'styled-components';
 import { Link, useNavigate} from 'react-router-dom';
+import axios from "axios"
 export default function SignIn(){
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -11,7 +12,15 @@ export default function SignIn(){
 
     function handleSubmit(e){
         e.preventDefault();
-        navigate("/home")
+        const data = {email,password}
+        const promise = axios.post("http://localhost:5000/sign-in",  data)
+        promise.then(response =>{
+            console.log(response.data)
+            navigate("/home")
+        })
+        promise.catch(e =>{
+            console.log(e.data)
+        })
     }
     return (
         <PageContainer>
