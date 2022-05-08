@@ -2,11 +2,16 @@ import { useState } from "react"
 import styled from 'styled-components';
 import { Link, useNavigate} from 'react-router-dom';
 import axios from "axios"
+
+import {useToken} from "../Contexts/userContext"
+
 export default function SignIn(){
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     console.log("email: ", email);
     console.log("password: ", password);
+
+    const {setToken} = useToken()
 
     const navigate = useNavigate();
 
@@ -16,6 +21,7 @@ export default function SignIn(){
         const promise = axios.post("http://localhost:5000/sign-in",  data)
         promise.then(response =>{
             console.log(response.data)
+            setToken(response.data)
             navigate("/home")
         })
         promise.catch(e =>{

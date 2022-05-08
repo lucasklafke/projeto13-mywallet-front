@@ -4,8 +4,12 @@ import { useNavigate } from "react-router-dom";
 
 import { IoLogOutOutline, IoAddCircleOutline, IoRemoveCircleOutline } from "react-icons/io5";
 
+import { useToken } from "../Contexts/userContext";
+
 export default function Home(){
     const navigate = useNavigate()
+    const { token } = useToken()
+    console.log(token)
     function logOut(){
         const answer = window.confirm("do you want to log out?")
         if(answer){

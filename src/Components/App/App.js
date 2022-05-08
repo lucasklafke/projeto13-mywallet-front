@@ -1,25 +1,27 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import {createGlobalStyle} from "styled-components";
 
-import SignIn from "./SignIn/SignIn";
-import SignUp from "./SignUp/SignUp";
-import Home from "./Home/Home";
-import Withdraw from "./Withdraw/Withdraw";
-import Deposit from "./Deposit/Deposit";
-
+import SignIn from "../SignIn/SignIn";
+import SignUp from "../SignUp/SignUp";
+import Home from "../Home/Home";
+import Withdraw from "../Withdraw/Withdraw";
+import Deposit from "../Deposit/Deposit";
+import UserProvider from "../Contexts/userContext";
 export default function App(){
     return (
-        <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<SignIn />} />
-                <Route path="/sign-up" element={<SignUp />} />
-                <Route path="home" element={<Home />} />
-                <Route path="withdraw" element={<Withdraw />} />
-                <Route path="deposit" element={<Deposit />} />
-    
-            </Routes>
-            <GlobalStyle/>
-        </BrowserRouter>
+        <UserProvider>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<SignIn />} />
+                    <Route path="/sign-up" element={<SignUp />} />
+                    <Route path="home" element={<Home />} />
+                    <Route path="withdraw" element={<Withdraw />} />
+                    <Route path="deposit" element={<Deposit />} />
+        
+                </Routes>
+                <GlobalStyle/>
+            </BrowserRouter>
+        </UserProvider>
     )
 }
 const GlobalStyle = createGlobalStyle`
