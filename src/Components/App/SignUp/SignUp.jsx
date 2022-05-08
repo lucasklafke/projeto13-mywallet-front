@@ -1,22 +1,42 @@
 import { useState } from "react"
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import axios from "axios"
 export default function SignUp() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
+    const [repeat_password, setRepeat_password] = useState('');
     console.log("email: ", email);
     console.log("password: ", password);
+
+    function handleSubmit(e){
+        e.preventDefault()
+        const data = {
+            name,
+            email,
+            password,
+            repeat_password
+        }
+        const promise = axios.post("http://localhost:5000/sign-up", data)
+
+        promise.then(response => {
+            window.alert("user created!")
+        })
+        promise.catch(response => {
+            console.log(response.response)
+            window.alert(response.response.data)
+        })
+    }
     return (
         <PageContainer>
             <h1>MyWallet</h1>
             <FormContainer>
-                <form>
+                <form onSubmit={e => handleSubmit(e) }>
                     <input type="text" placeholder="Name" value={name} onChange={e => { setName(e.target.value) }} />
                     <input type="text" placeholder="E-mail" value={email} onChange={e => { setEmail(e.target.value) }} />
                     <input type="text" placeholder="Password" value={password} onChange={e => { setPassword(e.target.value) }} />
-                    <input type="text" placeholder="Confirm password" value={confirmPassword} onChange={e => { setConfirmPassword(e.target.value) }} />
+                    <input type="text" placeholder="Confirm password" value={repeat_password} onChange={e => { setRepeat_password(e.target.value) }} />
                     <button>Register</button>
                 </form>
             </FormContainer>
