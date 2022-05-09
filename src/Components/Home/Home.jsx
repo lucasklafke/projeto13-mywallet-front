@@ -17,7 +17,7 @@ export default function Home(){
     const { token } = useToken()
     const {name, setName} = useName()
     function getTransactions(config) {
-        const promise = axios.get("http://localhost:5000/transactions", config)
+        const promise = axios.get("https://mywalletklafke.herokuapp.com/transactions", config)
 
         promise.then(response => {
             setTransactions(response.data)
@@ -28,7 +28,7 @@ export default function Home(){
         })
     }
     function getUser(config){
-        const promise = axios.get("http://localhost:5000/user",config)
+        const promise = axios.get("https://mywalletklafke.herokuapp.com/user",config)
         promise.then(response =>{
             setName(response.data)
         })

@@ -16,7 +16,7 @@ export default function SignIn(){
     function handleSubmit(e){
         e.preventDefault();
         const data = {email,password}
-        const promise = axios.post("http://localhost:5000/sign-in",  data)
+        const promise = axios.post("https://mywalletklafke.herokuapp.com/sign-in",  data)
         promise.then(response =>{
             setToken(response.data)
             navigate("/home")

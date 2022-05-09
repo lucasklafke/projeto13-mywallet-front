@@ -20,7 +20,7 @@ export default function SignUp() {
             password,
             repeat_password
         }
-        const promise = axios.post("http://localhost:5000/sign-up", data)
+        const promise = axios.post("https://mywalletklafke.herokuapp.com/sign-up", data)
 
         promise.then(response => {
             window.alert("user created!")

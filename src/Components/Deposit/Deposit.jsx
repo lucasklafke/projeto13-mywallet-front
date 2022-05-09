@@ -20,7 +20,7 @@ export default function Deposit(){
                 "Authorization": `Bearer ${token}`
             }
         }
-        const promise = axios.post("http://localhost:5000/transaction/deposit",data,config)
+        const promise = axios.post("https://mywalletklafke.herokuapp.com/transaction/deposit",data,config)
         promise.then(response => {
             window.alert(`deposit made,R$${Number(amount).toFixed(2)}`)
             navigate("/home")
