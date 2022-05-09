@@ -1,23 +1,20 @@
 import styled from "styled-components"
 
 export default function Transaction(props){
-    const {type,date,amount} = props
+    const {type,date,amount,description} = props
     
     const splitedDate = date.split("/")
     const formatedDate = (("0" + splitedDate[0]).slice(-2) +"/"+ ("0" + splitedDate[1]).slice(-2))
-    console.log("type",type)
-    console.log("date",date)
-    console.log("amount",amount)
     return (
         <TransactionContainer>
 
             <span className="date">{formatedDate}</span>
-            <span className="description">almoço mãe</span>
+            <span className="description">{description}</span>
             {
             type === "deposit"?
-            <Amount color="green">{amount.toFixed(2)}</Amount>
+            <Amount color="green">{Number(amount).toFixed(2)}</Amount>
             : 
-            <Amount color="red">{amount.toFixed(2)}</Amount>
+            <Amount color="red">{Number(amount).toFixed(2) }</Amount>
             }
         </TransactionContainer>
     )

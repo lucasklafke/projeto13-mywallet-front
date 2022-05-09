@@ -7,24 +7,24 @@ import { IoLogOutOutline, IoAddCircleOutline, IoRemoveCircleOutline } from "reac
 
 import { useToken, useName} from "../Contexts/userContext";
 import Transaction from "./Transaction"
+import SignUp from "../SignUp/SignUp";
 
 export default function Home(){
 
     const [transactions, setTransactions] = useState([])
+    const  [total,setTotal] = useState(0)
     const navigate = useNavigate()
     const { token } = useToken()
     const {name, setName} = useName()
-    console.log(token)
-
     function getTransactions(config) {
         const promise = axios.get("http://localhost:5000/transactions", config)
 
         promise.then(response => {
-            console.log(response.data)
             setTransactions(response.data)
+            calculateTotal(response.data)
         })
         promise.catch(response => {
-            console.log(response.response)
+            window.alert(response.response.data)
         })
     }
     function getUser(config){
@@ -32,7 +32,7 @@ export default function Home(){
         promise.then(response =>{
             setName(response.data)
         })
-        promise.catch(response => console.log(response.data))
+        promise.catch(response => window.alert(response.response.data))
     }
     useEffect(() =>{
         const config = {
@@ -56,16 +56,39 @@ export default function Home(){
     function newTransaction(type){
         navigate(`/${type}`)
     }
+    function calculateTotal(transaction){
+        let sum = 0
+        transaction.forEach(t => {
+            console.log(total)
+            console.log(t.type)
+            console.log(typeof( t.amount))
+            if(t.type === "deposit"){
+                sum += Number(t.amount)
+            } else{
+                sum -= Number(t.amount)
+            }
+        })
+        setTotal(sum)
+    }
     return (
         <PageContainer>
             <header>
-                <h1>Olá,{name}</h1>
+                <h1>Hello,{name}</h1>
                 <IoLogOutOutline color="fff" fontSize="30" fontWeight="700" onClick={() => logOut()}/>
             </header>
             <main>
                 {transactions ?
-                transactions.map(t => <Transaction date={t.date} amount={t.amount} type={t.type}/>) 
+                transactions.map(t => <Transaction date={t.date} amount={t.amount} type={t.type} description={t.description}/>) 
                 : <span>There are no transactions</span>}
+                <div className="total">
+                    <span className="totalText">Total</span>
+                    {Number(total) > 0 ?
+                    
+                        <Total color="green">{total.toFixed(2)}</Total>
+                    :
+                        <Total color="red">{total.toFixed(2)}</Total>
+                    }
+                    </div>
             </main>
             <div className="transactions">
                 <button onClick={() => newTransaction("deposit")}><IoAddCircleOutline color="fff" fontSize="25"/><span>Nova entrada</span></button>
@@ -108,6 +131,28 @@ const PageContainer = styled.div`
         height: 450px;
         background-color: #fff;
         border-radius: 5px;
+        position: relative;
+
+        .total{
+            position: absolute;
+            bottom: 20px;
+
+            font-family: 'Raleway';
+            font-size: 17px;
+
+            display: flex;
+            justify-content: space-between;
+            width: 300px;
+
+            .totalText{
+                font-family: 'Raleway';
+                font-style: normal;
+                font-weight: 700;
+                font-size: 17px;
+
+                color: #000000;
+            }
+        }
     }
     .transactions{
         display: flex;
@@ -152,4 +197,12 @@ const PageContainer = styled.div`
         }
         
     }
+`
+
+const Total = styled.span`
+    color: ${props => props.color};
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 17px;
 `

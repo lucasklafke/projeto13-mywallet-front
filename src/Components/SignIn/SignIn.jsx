@@ -8,8 +8,6 @@ import {useToken} from "../Contexts/userContext"
 export default function SignIn(){
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    console.log("email: ", email);
-    console.log("password: ", password);
 
     const {setToken} = useToken()
 
@@ -20,12 +18,11 @@ export default function SignIn(){
         const data = {email,password}
         const promise = axios.post("http://localhost:5000/sign-in",  data)
         promise.then(response =>{
-            console.log(response.data)
             setToken(response.data)
             navigate("/home")
         })
         promise.catch(e =>{
-            console.log(e.data)
+            window.alert(e.response.data)
         })
     }
     return (
@@ -34,8 +31,8 @@ export default function SignIn(){
             <FormContainer>
                 <form onSubmit={e => handleSubmit(e)}>
                     <input type="text" placeholder="E-mail" value={email} onChange={e => { setEmail(e.target.value) }}/>
-                    <input type="text" placeholder="Password" value={password} onChange={e => { setPassword(e.target.value) }}/>
-                    <button>Entrar</button>
+                    <input type="Password" placeholder="Password" value={password} onChange={e => { setPassword(e.target.value) }}/>
+                    <button>Enter</button>
                 </form>
             </FormContainer>
             <Link to="/sign-up">

@@ -1,6 +1,6 @@
 import { useState } from "react"
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios"
 
 
@@ -10,8 +10,7 @@ export default function SignUp() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [repeat_password, setRepeat_password] = useState('');
-    console.log("email: ", email);
-    console.log("password: ", password);
+    const navigate = useNavigate()
     
     function handleSubmit(e){
         e.preventDefault()
@@ -25,9 +24,9 @@ export default function SignUp() {
 
         promise.then(response => {
             window.alert("user created!")
+            navigate("/")
         })
         promise.catch(response => {
-            console.log(response.response)
             window.alert(response.response.data)
         })
     }
@@ -38,8 +37,8 @@ export default function SignUp() {
                 <form onSubmit={e => handleSubmit(e) }>
                     <input type="text" placeholder="Name" value={name} onChange={e => { setName(e.target.value) }} />
                     <input type="text" placeholder="E-mail" value={email} onChange={e => { setEmail(e.target.value) }} />
-                    <input type="text" placeholder="Password" value={password} onChange={e => { setPassword(e.target.value) }} />
-                    <input type="text" placeholder="Confirm password" value={repeat_password} onChange={e => { setRepeat_password(e.target.value) }} />
+                    <input type="password" placeholder="Password" value={password} onChange={e => { setPassword(e.target.value) }} />
+                    <input type="password" placeholder="Confirm password" value={repeat_password} onChange={e => { setRepeat_password(e.target.value) }} />
                     <button>Register</button>
                 </form>
             </FormContainer>
