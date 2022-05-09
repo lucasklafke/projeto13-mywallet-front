@@ -19,7 +19,7 @@ export default function Deposit() {
                 "Authorization": `Bearer ${token}`
             }
         }
-        const promise = axios.post("https://mywalletklafke.herokuapp.com/withdraw", data, config)
+        const promise = axios.post("https://mywalletklafke.herokuapp.com/transaction/withdraw", data, config)
         promise.then(response => {
             window.alert(`withdraw made,R$${Number(amount).toFixed(2)}`)
             navigate("/home")

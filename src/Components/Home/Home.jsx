@@ -59,9 +59,6 @@ export default function Home(){
     function calculateTotal(transaction){
         let sum = 0
         transaction.forEach(t => {
-            console.log(total)
-            console.log(t.type)
-            console.log(typeof( t.amount))
             if(t.type === "deposit"){
                 sum += Number(t.amount)
             } else{
@@ -77,9 +74,11 @@ export default function Home(){
                 <IoLogOutOutline color="fff" fontSize="30" fontWeight="700" onClick={() => logOut()}/>
             </header>
             <main>
-                {transactions ?
-                transactions.map(t => <Transaction date={t.date} amount={t.amount} type={t.type} description={t.description}/>) 
-                : <span>There are no transactions</span>}
+                <div className="transactionsContainer">
+                    {transactions ?
+                    transactions.map(t => <Transaction date={t.date} amount={t.amount} type={t.type} description={t.description}/>) 
+                    : <span>There are no transactions</span>}
+                </div>
                 <div className="total">
                     <span className="totalText">Total</span>
                     {Number(total) > 0 ?
@@ -88,7 +87,7 @@ export default function Home(){
                     :
                         <Total color="red">{total.toFixed(2)}</Total>
                     }
-                    </div>
+                </div>
             </main>
             <div className="transactions">
                 <button onClick={() => newTransaction("deposit")}><IoAddCircleOutline color="fff" fontSize="25"/><span>Nova entrada</span></button>
@@ -125,13 +124,20 @@ const PageContainer = styled.div`
     }
     main{
         display: flex;
-        flex-direction: column;
-        align-items: center;
         width: 325px;
-        height: 450px;
+        height: 400px;
         background-color: #fff;
         border-radius: 5px;
         position: relative;
+        overflow: scroll;
+        padding-bottom: 50px;
+        justify-content: center;
+
+        .transactionsContainer{
+            width: 95%;
+            height: 400px;
+            overflow-y: scroll;
+        }
 
         .total{
             position: absolute;
